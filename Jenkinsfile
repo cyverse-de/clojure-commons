@@ -1,3 +1,4 @@
+#!groovy
 def repo = "clojure-commons"
 def dockerUser = "discoenv"
 
