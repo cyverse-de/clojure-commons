@@ -11,7 +11,7 @@ node {
     dockerDeployer = "deploy-${env.BUILD_TAG}"
     try {
         stage "Test"
-            sh "docker run --name ${dockerTestRunner}--rm ${dockerRepo}"
+            sh "docker run --name ${dockerTestRunner} --rm ${dockerRepo}"
 
         stage "Deploy"
         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'jenkins-clojars-credentials', usernameVariable: 'LEIN_USERNAME', passwordVariable: 'LEIN_PASSWORD']]) {
