@@ -1,0 +1,16 @@
+pom.xml
+pom.xml.asc
+*jar
+lib
+classes
+*~
+bin
+.classpath
+.project
+.lein*
+\#*\#
+/target
+/.settings
+build.xml
+test2junit
+Jenkinsfile
