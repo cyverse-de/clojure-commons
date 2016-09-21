@@ -1,5 +1,5 @@
 #!groovy
-node {
+node('docker') {
     slackJobDescription = "job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
     try {
         stage "Build"
@@ -10,15 +10,15 @@ node {
         sh "docker build --rm -t ${dockerRepo} ."
 
         dockerTestRunner = "test-${env.BUILD_TAG}"
+        dockerTestCleanup = "test-cleanup-${env.BUILD_TAG}"
         dockerDeployer = "deploy-${env.BUILD_TAG}"
         try {
             stage "Test"
             try {
-                sh "docker run --name ${dockerTestRunner} --rm ${dockerRepo}"
+                sh "docker run --rm --name ${dockerTestRunner} -v \$(pwd)/test2junit:/usr/src/app/test2junit ${dockerRepo}"
             } finally {
                 junit 'test2junit/xml/*.xml'
 
-                dockerTestCleanup = "test-cleanup-${env.BUILD_TAG}"
                 sh "docker run --rm --name ${dockerTestCleanup} -v \$(pwd):/build -w /build alpine rm -r test2junit"
             }
 
