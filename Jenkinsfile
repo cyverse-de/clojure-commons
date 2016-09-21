@@ -13,7 +13,14 @@ node {
         dockerDeployer = "deploy-${env.BUILD_TAG}"
         try {
             stage "Test"
+            try {
                 sh "docker run --name ${dockerTestRunner} --rm ${dockerRepo}"
+            } finally {
+                junit 'test2junit/xml/*.xml'
+
+                dockerTestCleanup = "test-cleanup-${env.BUILD_TAG}"
+                sh "docker run --rm --name ${dockerTestCleanup} -v \$(pwd):/build -w /build alpine rm -r test2junit"
+            }
 
             stage "Deploy"
             withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'jenkins-clojars-credentials', usernameVariable: 'LEIN_USERNAME', passwordVariable: 'LEIN_PASSWORD']]) {
@@ -22,15 +29,16 @@ node {
         } finally {
             sh returnStatus: true, script: "docker kill ${dockerTestRunner}"
             sh returnStatus: true, script: "docker rm ${dockerTestRunner}"
+
+            sh returnStatus: true, script: "docker kill ${dockerTestCleanup}"
+            sh returnStatus: true, script: "docker rm ${dockerTestCleanup}"
+
             sh returnStatus: true, script: "docker kill ${dockerDeployer}"
             sh returnStatus: true, script: "docker rm ${dockerDeployer}"
+
             sh returnStatus: true, script: "docker rmi ${dockerRepo}"
         }
     } catch (InterruptedException e) {
-        currentBuild.result = "ABORTED"
-        slackSend color: 'warning', message: "ABORTED: ${slackJobDescription}"
-        throw e
-    } catch (hudson.AbortException e) {
         currentBuild.result = "ABORTED"
         slackSend color: 'warning', message: "ABORTED: ${slackJobDescription}"
         throw e

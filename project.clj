@@ -3,7 +3,7 @@
   :url "https://github.com/cyverse-de/iplant-clojure-commons"
   :license {:name "BSD"
             :url "http://iplantcollaborative.org/sites/default/files/iPLANT-LICENSE.txt"}
-  :plugins [[test2junit "1.1.3"]]
+  :plugins [[test2junit "1.2.2"]]
   :deploy-repositories [["releases" :clojars]
                         ["snapshots" :clojars]]
   :dependencies [[org.clojure/clojure "1.8.0"]
