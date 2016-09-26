@@ -1,4 +1,4 @@
-(defproject org.cyverse/clojure-commons "2.8.1"
+(defproject org.cyverse/clojure-commons "2.8.2-SNAPSHOT"
   :description "Common Utilities for Clojure Projects"
   :url "https://github.com/cyverse-de/iplant-clojure-commons"
   :license {:name "BSD"
