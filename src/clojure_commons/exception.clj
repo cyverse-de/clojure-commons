@@ -137,6 +137,9 @@
 (def unavailable-handler
   (default-error-handler resp/gateway-timeout ec/ERR_UNAVAILABLE))
 
+(def internal-system-error-handler
+  (default-error-handler resp/internal-server-error ec/ERR_SYSTEM))
+
 (defn unchecked-handler
   [error error-type request]
   (let [error-obj (:object (get-throw-context error))]
@@ -214,6 +217,5 @@
     ::request-failed           request-failed-handler
     ::temporary-redirect       temporary-redirect-handler
     ::unavailable              unavailable-handler
+    ::internal-system-error    internal-system-error-handler
     ::ex/default               unchecked-handler}})
-
-

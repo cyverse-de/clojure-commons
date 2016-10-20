@@ -31,3 +31,8 @@
   "Throws an error indicating that a resource could not be found."
   [reason & {:as ex-info}]
   (throw+ (assoc ex-info :type ::cx/not-found :error reason)))
+
+(defn internal-system-error
+  "Throws an error explicitly indicating that an internal system error occurred."
+  [reason & {:as ex-info}]
+  (throw+ (assoc ex-info :type ::cx/internal-system-error :error reason)))
