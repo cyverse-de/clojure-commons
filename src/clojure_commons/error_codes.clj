@@ -50,6 +50,7 @@
 (deferr ERR_REQUEST_BODY_TOO_LARGE)
 (deferr ERR_CONFLICTING_QUERY_PARAMETER_VALUES)
 (deferr ERR_SCHEMA_VALIDATION)
+(deferr ERR_SYSTEM)
 
 
 (def ^:private http-status-for
