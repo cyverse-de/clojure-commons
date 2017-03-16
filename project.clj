@@ -17,7 +17,7 @@
                  [cheshire "5.6.3"]
                  [clj-http "2.0.0"]
                  [clj-time "0.12.2"]
-                 [com.cemerick/url "0.1.1"]
+                 [com.cemerick/url "0.1.1" :exclusions [com.cemerick/clojurescript.test]]
                  [commons-configuration "1.10"    ; provides org.apache.commons.configuration
                   :exclusions [commons-logging]]
                  [me.raynes/fs "1.4.6"]
