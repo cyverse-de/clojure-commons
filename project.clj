@@ -1,4 +1,4 @@
-(defproject org.cyverse/clojure-commons "2.8.4-SNAPSHOT"
+(defproject org.cyverse/clojure-commons "3.0.0-SNAPSHOT"
   :description "Common Utilities for Clojure Projects"
   :url "https://github.com/cyverse-de/iplant-clojure-commons"
   :license {:name "BSD"
@@ -13,7 +13,7 @@
                  [org.clojure/tools.logging "0.3.1"]
                  [buddy/buddy-sign "0.7.0"]
                  [metosin/ring-http-response "0.8.0"]
-                 [metosin/compojure-api "1.1.8"]
+                 [metosin/compojure-api "2.0.0-alpha28"]
                  [cheshire "5.6.3"]
                  [clj-http "2.0.0"]
                  [clj-time "0.12.2"]
