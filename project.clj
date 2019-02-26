@@ -12,7 +12,7 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/tools.logging "0.3.1"]
                  [buddy/buddy-sign "0.7.0"]
-                 [metosin/compojure-api "2.0.0-alpha28"]
+                 [metosin/compojure-api "1.1.8"]
                  [cheshire "5.6.3"]
                  [clj-http "2.0.0"]
                  [clj-time "0.12.2"]
