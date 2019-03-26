@@ -13,3 +13,4 @@ bin
 /.settings
 build.xml
 test2junit
+.eastwood
