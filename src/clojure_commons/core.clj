@@ -15,3 +15,9 @@
      `(when-let [~(first bindings) ~(second bindings)]
         (when-let* ~(drop 2 bindings) ~@body))
      `(do ~@body))))
+
+(defn unique-by
+  "Returns a list of items in a sequence for which a function returns unique values. For example, to return a list
+   of maps in a list with a unique :id field, you could run (unique-by :id map-list)."
+  [f s]
+  (vals (into {} (map (juxt f identity) s))))
