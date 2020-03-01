@@ -57,6 +57,19 @@
   (let [accepted-keys (load-public-keys public-key-path accepted-keys-dir)]
     (partial unsign-assertion accepted-keys alg)))
 
+(defn- check-jwk
+  [jwk assertion]
+  (check-key (keys/jwk->public-key jwk) (:alg jwk) assertion))
+
+(defn jwk-validate
+  "Validates a JWT assertion against a set of JWKs (JSON web keys). JSON web keys are intended to be retrieved
+   from an identity provider endpoint, so they may change without our knowledge. For this reason, we're not
+   going to attempt to memoize the parsed keys like we do for keys stored on the filesystem."
+  [jwks assertion]
+  (or (first (remove nil? (map #(check-jwk % assertion) jwks)))
+      (throw (ex-info "Untrusted JWT signature."
+                      {:type :validation :cause :signature}))))
+
 (defn user-from-default-assertion
   [jwt]
   {:user        (:sub jwt)

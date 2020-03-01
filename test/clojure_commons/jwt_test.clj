@@ -1,7 +1,8 @@
 (ns clojure-commons.jwt-test
   (:use [clojure.test]
         [slingshot.slingshot :only [try+]])
-  (:require [clj-time.core :as time]
+  (:require [buddy.core.keys :as keys]
+            [clj-time.core :as time]
             [clojure.string :as string]
             [clojure-commons.jwt :as jwt])
   (:import [clojure.lang ExceptionInfo]))
@@ -28,6 +29,11 @@
                      :private-key-path     "test-resources/private-keys/untrusted.pem"
                      :private-key-password "untrusted"
                      :alg                  :rs256})
+
+(def accepted-jwks
+  (mapv (comp #(assoc % :alg :rs256) keys/public-key->jwk keys/public-key)
+        ["test-resources/public-key.pem"
+         "test-resources/accepted-keys/second-key.pem"]))
 
 (def expired-opts (assoc opts :validity-window-end -1))
 
@@ -56,6 +62,16 @@
   (is (= :signature (exception-cause #(validator (untrusted-generator user))))
       "Untrusted signature message for untrusted signing key.")
   (is (= :exp (exception-cause #(validator (expired-generator user))))
+      "Expired token message for expired token."))
+
+(deftest jwk-test
+  (is (= user (jwt/user-from-default-assertion (jwt/jwk-validate accepted-jwks (generator user))))
+      "Can validate an assertion - first JWK.")
+  (is (= user (jwt/user-from-default-assertion (jwt/jwk-validate accepted-jwks (second-generator user))))
+      "Can validate an assertion - second JWK.")
+  (is (= :signature (exception-cause #(jwt/jwk-validate accepted-jwks (untrusted-generator user))))
+      "Untrusted signature message for untrusted signing key.")
+  (is (= :exp (exception-cause #(jwt/jwk-validate accepted-jwks (expired-generator user))))
       "Expired token message for expired token."))
 
 (defn- build-custom-assertion
