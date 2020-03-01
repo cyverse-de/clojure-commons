@@ -3,7 +3,7 @@
         [medley.core :only [remove-vals]]
         [slingshot.slingshot :only [try+]])
   (:require [buddy.core.keys :as keys]
-            [buddy.sign.jws :as jws]
+            [buddy.sign.jwt :as jwt]
             [clj-time.core :as time]
             [clojure.string :as string]
             [clojure-commons.exception-util :as cx-util]))
@@ -26,7 +26,7 @@
   ([assertion-builder {:keys [validity-window-end private-key-path private-key-password alg]}]
      (let [private-key (keys/private-key private-key-path private-key-password)]
        (fn [user]
-         (jws/sign (assertion-builder validity-window-end user)
+         (jwt/sign (assertion-builder validity-window-end user)
                    private-key
                    {:alg alg})))))
 
@@ -43,7 +43,7 @@
 (defn- check-key
   [key alg assertion]
   (try+
-   (jws/unsign assertion key {:alg alg})
+   (jwt/unsign assertion key {:alg alg})
    (catch [:cause :signature] _ nil)))
 
 (defn- unsign-assertion

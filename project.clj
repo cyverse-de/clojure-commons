@@ -11,7 +11,7 @@
                         ["snapshots" :clojars]]
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [org.clojure/tools.logging "1.0.0"]
-                 [buddy/buddy-sign "0.7.0"]
+                 [buddy/buddy-sign "3.1.0"]
                  [metosin/compojure-api "1.1.13"]
                  [cheshire "5.10.0"]
                  [clj-http "3.10.0"]
