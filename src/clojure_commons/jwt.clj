@@ -3,7 +3,7 @@
         [medley.core :only [remove-vals]]
         [slingshot.slingshot :only [try+]])
   (:require [buddy.core.keys :as keys]
-            [buddy.sign.jws :as jws]
+            [buddy.sign.jwt :as jwt]
             [clj-time.core :as time]
             [clojure.string :as string]
             [clojure-commons.exception-util :as cx-util]))
@@ -26,7 +26,7 @@
   ([assertion-builder {:keys [validity-window-end private-key-path private-key-password alg]}]
      (let [private-key (keys/private-key private-key-path private-key-password)]
        (fn [user]
-         (jws/sign (assertion-builder validity-window-end user)
+         (jwt/sign (assertion-builder validity-window-end user)
                    private-key
                    {:alg alg})))))
 
@@ -43,7 +43,7 @@
 (defn- check-key
   [key alg assertion]
   (try+
-   (jws/unsign assertion key {:alg alg})
+   (jwt/unsign assertion key {:alg alg})
    (catch [:cause :signature] _ nil)))
 
 (defn- unsign-assertion
@@ -56,6 +56,20 @@
   [{:keys [public-key-path accepted-keys-dir alg]}]
   (let [accepted-keys (load-public-keys public-key-path accepted-keys-dir)]
     (partial unsign-assertion accepted-keys alg)))
+
+(defn- check-jwk
+  [jwk assertion]
+  (let [get-jwk-alg (comp keyword string/lower-case name :alg)]
+    (check-key (keys/jwk->public-key jwk) (get-jwk-alg jwk) assertion)))
+
+(defn jwk-validate
+  "Validates a JWT assertion against a set of JWKs (JSON web keys). JSON web keys are intended to be retrieved
+   from an identity provider endpoint, so they may change without our knowledge. For this reason, we're not
+   going to attempt to memoize the parsed keys like we do for keys stored on the filesystem."
+  [jwks assertion]
+  (or (first (remove nil? (map #(check-jwk % assertion) jwks)))
+      (throw (ex-info "Untrusted JWT signature."
+                      {:type :validation :cause :signature}))))
 
 (defn user-from-default-assertion
   [jwt]
