@@ -59,7 +59,8 @@
 
 (defn- check-jwk
   [jwk assertion]
-  (check-key (keys/jwk->public-key jwk) (:alg jwk) assertion))
+  (let [get-jwk-alg (comp keyword string/lower-case name :alg)]
+    (check-key (keys/jwk->public-key jwk) (get-jwk-alg jwk) assertion)))
 
 (defn jwk-validate
   "Validates a JWT assertion against a set of JWKs (JSON web keys). JSON web keys are intended to be retrieved
