@@ -1,8 +1,8 @@
 (defproject org.cyverse/clojure-commons "3.0.6-SNAPSHOT"
   :description "Common Utilities for Clojure Projects"
-  :url "https://github.com/cyverse-de/iplant-clojure-commons"
+  :url "https://github.com/cyverse-de/clojure-commons"
   :license {:name "BSD"
-            :url "http://iplantcollaborative.org/sites/default/files/iPLANT-LICENSE.txt"}
+            :url "https://cyverse.org/license"}
   :eastwood {:exclude-namespaces [:test-paths]
              :linters [:wrong-arity :wrong-ns-form :wrong-pre-post :wrong-tag :misplaced-docstrings]}
   :plugins [[jonase/eastwood "0.3.5"]
@@ -16,6 +16,7 @@
                  [cheshire "5.10.0"]
                  [clj-http "3.10.0"]
                  [clj-time "0.15.2"]
+                 [clojurewerkz/propertied "1.3.0"]
                  [com.cemerick/url "0.1.1" :exclusions [com.cemerick/clojurescript.test]]
                  [commons-configuration "1.10"    ; provides org.apache.commons.configuration
                   :exclusions [commons-logging]]

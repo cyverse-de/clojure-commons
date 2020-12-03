@@ -1,5 +1,6 @@
 (ns clojure-commons.config
   (:use [clojure.java.io :only [file]]
+        [clojurewerkz.propertied.properties :only [map->properties]]
         [slingshot.slingshot :only [throw+]])
   (:require [clojure.string :as string]
             [clojure-commons.error-codes :as ce]
@@ -26,6 +27,11 @@
    (if (nil? conf-dir)
      (dosync (ref-set props (cp/read-properties (file filename))))
      (dosync (ref-set props (cp/read-properties (file conf-dir filename)))))))
+
+(defn load-config-from-map
+  "Loads configuration properties from a Clojure map. This function is used primarily for unit testing services."
+  [m props]
+  (dosync (ref-set props (map->properties m))))
 
 (defn masked-field?
   "Returns a truthy value if the field should be masked and a falsey value if it shouldn't."
