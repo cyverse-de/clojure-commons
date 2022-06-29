@@ -49,6 +49,7 @@
 (deferr ERR_TEMPORARILY_MOVED)
 (deferr ERR_REQUEST_BODY_TOO_LARGE)
 (deferr ERR_CONFLICTING_QUERY_PARAMETER_VALUES)
+(deferr ERR_CONFLICT)
 (deferr ERR_SCHEMA_VALIDATION)
 (deferr ERR_SYSTEM)
 
@@ -66,6 +67,7 @@
    ERR_NOT_FOUND                          404
    ERR_NOT_UNIQUE                         400
    ERR_CONFLICTING_QUERY_PARAMETER_VALUES 409
+   ERR_CONFLICT                           409
    ERR_REQUEST_BODY_TOO_LARGE             413
    ERR_TEMPORARILY_MOVED                  302})
 
