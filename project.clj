@@ -1,4 +1,4 @@
-(defproject org.cyverse/clojure-commons "3.0.8-SNAPSHOT"
+(defproject org.cyverse/clojure-commons "3.0.8"
   :description "Common Utilities for Clojure Projects"
   :url "https://github.com/cyverse-de/clojure-commons"
   :license {:name "BSD"
@@ -25,5 +25,5 @@
                  [medley "1.4.0"]
                  [slingshot "0.12.2"]
                  [trptcolin/versioneer "0.2.0"]
-                 [org.cyverse/service-logging "2.8.4-SNAPSHOT"]]
+                 [org.cyverse/service-logging "2.8.4"]]
   :profiles {:test {:resource-paths ["resources" "test-resources"]}})
