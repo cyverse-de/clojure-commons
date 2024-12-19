@@ -17,3 +17,5 @@ test2junit
 .nrepl-port
 .clj-kondo
 .lsp
+.idea
+*.iml
