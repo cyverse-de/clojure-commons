@@ -49,7 +49,7 @@
   [extraction-fn flag-props]
   (if (empty? flag-props)
     `(memoize ~extraction-fn)
-    `(memoize (fn [] (when (some #(%) ~(vec flag-props)) (~extraction-fn))))))
+    `(memoize (fn [] (when (some identity ~(vec flag-props)) (~extraction-fn))))))
 
 (defn define-property
   "Defines a property. This is a helper function that performs common tasks required by all of the
