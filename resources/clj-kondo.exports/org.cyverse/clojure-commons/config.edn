@@ -1,14 +1,14 @@
 {:hooks
- {:analyze-call
-  {clojure-commons.config/defprop-str        clojure-commons-hooks.config/defprop
-   clojure-commons.config/defprop-optstr     clojure-commons-hooks.config/defprop
-   clojure-commons.config/defprop-vec        clojure-commons-hooks.config/defprop
-   clojure-commons.config/defprop-optvec     clojure-commons-hooks.config/defprop
-   clojure-commons.config/defprop-int        clojure-commons-hooks.config/defprop
-   clojure-commons.config/defprop-optint     clojure-commons-hooks.config/defprop
-   clojure-commons.config/defprop-long       clojure-commons-hooks.config/defprop
-   clojure-commons.config/defprop-optlong    clojure-commons-hooks.config/defprop
-   clojure-commons.config/defprop-boolean    clojure-commons-hooks.config/defprop
-   clojure-commons.config/defprop-optboolean clojure-commons-hooks.config/defprop
-   clojure-commons.config/defprop-uuid       clojure-commons-hooks.config/defprop
-   clojure-commons.config/defprop-optuuid    clojure-commons-hooks.config/defprop}}}
+ {:macroexpand
+  {clojure-commons.config/defprop-str        clojure-commons.config/defprop-str
+   clojure-commons.config/defprop-optstr     clojure-commons.config/defprop-optstr
+   clojure-commons.config/defprop-vec        clojure-commons.config/defprop-str
+   clojure-commons.config/defprop-optvec     clojure-commons.config/defprop-optstr
+   clojure-commons.config/defprop-int        clojure-commons.config/defprop-str
+   clojure-commons.config/defprop-optint     clojure-commons.config/defprop-optstr
+   clojure-commons.config/defprop-long       clojure-commons.config/defprop-str
+   clojure-commons.config/defprop-optlong    clojure-commons.config/defprop-optstr
+   clojure-commons.config/defprop-boolean    clojure-commons.config/defprop-str
+   clojure-commons.config/defprop-optboolean clojure-commons.config/defprop-optstr
+   clojure-commons.config/defprop-uuid       clojure-commons.config/defprop-str
+   clojure-commons.config/defprop-optuuid    clojure-commons.config/defprop-optstr}}}
