@@ -1,7 +1,7 @@
 (ns clojure-commons.error-codes-test
-  (:use [clojure.test]
-        [clojure-commons.error-codes])
-  (:require [cheshire.core :as cheshire]))
+  (:require [cheshire.core :as cheshire]
+            [clojure.test :refer [deftest is]]
+            [clojure-commons.error-codes :refer [err-resp success-resp]]))
 
 (def ^:private err-obj {:foo "bar"})
 
@@ -21,7 +21,7 @@
    :body   "foo"})
 
 (defn expected-success-resp
-  [action s]
+  [_action s]
   {:status 200
    :body   (cond (map? s)          (cheshire/encode s)
                  (not (string? s)) (str s)

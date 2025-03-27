@@ -1,10 +1,9 @@
 (ns clojure-commons.error-codes
-  (:use [slingshot.slingshot :only [try+]])
   (:require [clojure.tools.logging :as log]
             [cheshire.core :as cheshire]
-            [clojure.string :as string])
-  (:import [java.io PrintWriter
-                    StringWriter]))
+            [clojure.string :as string]
+            [slingshot.slingshot :refer [try+]])
+  (:import [java.io PrintWriter StringWriter]))
 
 (defmacro deferr
   [sym]
@@ -176,7 +175,7 @@
     (catch [:type :ring.swagger.schema/validation] {:keys [error]} (validation-error-response error))
     (catch [:type :compojure.api.exception/request-validation] {:keys [error]} (validation-error-response error))
     (catch [:type :compojure.api.exception/response-validation] {:keys [error]} (validation-error-response error))
-    (catch Object e
+    (catch Object _
       (log/error (format-exception (:throwable &throw-context)))
       (err-resp action (unchecked &throw-context)))))
 

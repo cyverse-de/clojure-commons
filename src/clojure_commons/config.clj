@@ -1,13 +1,10 @@
 (ns clojure-commons.config
-  (:use [clojure.java.io :only [file]]
-        [clojurewerkz.propertied.properties :only [map->properties]]
-        [slingshot.slingshot :only [throw+]])
-  (:require [clojure.string :as string]
-            [clojure-commons.error-codes :as ce]
+  (:require [clojure.java.io :refer [file]]
+            [clojure.string :as string]
             [clojure-commons.props :as cp]
-            [clojure.tools.logging :as log])
-  (:import [java.io IOException]
-           [java.util UUID]))
+            [clojure.tools.logging :as log]
+            [clojurewerkz.propertied.properties :refer [map->properties]])
+  (:import [java.util UUID]))
 
 (defn load-config-from-file
   "A multi-arity function that loads the configuration properties from a file.
@@ -123,9 +120,9 @@
        prop-name    - the name of the property.
        config-valid - a ref containing a validity flag.
        default      - the default property value."
-  ([props prop-name config-valid]
+  ([props prop-name _config-valid]
      (get @props prop-name ""))
-  ([props prop-name config-valid default]
+  ([props prop-name _config-valid default]
      (get @props prop-name default)))
 
 (defn vector-from-prop

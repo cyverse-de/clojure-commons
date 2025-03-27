@@ -1,6 +1,5 @@
 (ns clojure-commons.props
-  (:use [clojure.java.io :only (file input-stream)])
-  (:require [clojure.string :as string]
+  (:require [clojure.java.io :refer [file]]
             [trptcolin.versioneer.core :as version])
   (:import [java.net URLDecoder]
            [org.apache.commons.configuration PropertiesConfiguration]))
@@ -29,7 +28,7 @@
       (getContextClassLoader)
       (getResourceAsStream (file filepath))))
 
-(defn- ^String find-config-file
+(defn- find-config-file
   "Finds a configuration file, which may in tghe classpath or in the 'resources'
    subdirectory of the current working directory."
   [file-name]

@@ -1,0 +1,7 @@
+.clj-kondo/imports/potemkin/potemkin/config.edn:           potemkin.collections/reify-map-type  clojure.core/reify
+.clj-kondo/imports/potemkin/potemkin/config.edn:           potemkin.collections/def-map-type    clj-kondo.lint-as/def-catch-all
+.clj-kondo/imports/potemkin/potemkin/config.edn:           potemkin/reify-map-type              clojure.core/reify
+.clj-kondo/imports/potemkin/potemkin/config.edn:           potemkin/def-map-type                clj-kondo.lint-as/def-catch-all}
+src/clojure_commons/config.clj:            [clojurewerkz.propertied.properties :refer [map->properties]])
+src/clojure_commons/config.clj:  (dosync (ref-set props (map->properties m))))
+src/clojure_commons/core.clj:   of maps in a list with a unique :id field, you could run (unique-by :id map-list)."

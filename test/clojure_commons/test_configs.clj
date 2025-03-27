@@ -1,5 +1,5 @@
 (ns clojure-commons.test-configs
-  (:use [clojure-commons.config]))
+  (:require [clojure-commons.config :refer :all]))
 
 (def props
   "The example properties to use for testing. Note that the properties aren't actually loaded

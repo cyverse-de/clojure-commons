@@ -1,8 +1,7 @@
 (ns clojure-commons.progress
   (:require [clj-time.core :as ct])
   (:import [clojure.lang IFn]
-           [org.joda.time PeriodType Interval]
-           [org.joda.time.format PeriodFormatterBuilder PeriodFormatter]))
+           [org.joda.time.format PeriodFormatterBuilder PeriodFormatter PeriodType]))
 
 
 (def ^:private ^PeriodFormatter period-formatter
@@ -40,7 +39,7 @@
         r))))
 
 
-(defn ^IFn notifier
+(defn notifier
   "This function wraps a given function intended for sequence mapping with a monad that writes
    progress messages using another given function.
 
@@ -57,10 +56,10 @@
    Returns:
      It returns a function that accepts a sequence as its only argument. It returns whatever
      transform returns."
-  ([^Boolean notifications-enabled? ^IFn notify ^Integer notify-step]
+  (^IFn [^Boolean notifications-enabled? ^IFn notify ^Integer notify-step]
    (notifier notifications-enabled? notify notify-step identity))
 
-  ([^Boolean notifications-enabled? ^IFn notify ^Integer notify-step ^IFn transform]
+  (^IFn [^Boolean notifications-enabled? ^IFn notify ^Integer notify-step ^IFn transform]
    (if notifications-enabled?
      (create-notifier notify notify-step transform)
      transform)))

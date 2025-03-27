@@ -1,7 +1,7 @@
 (ns clojure-commons.assertions
-  (:use [slingshot.slingshot :only [throw+]])
   (:require [clojure.string :as string]
-            [clojure-commons.error-codes :as ce]))
+            [clojure-commons.error-codes :as ce]
+            [slingshot.slingshot :refer [throw+]]))
 
 (defn not-found
   "Throws an exception indicating that an object wasn't found."

@@ -1,6 +1,6 @@
 (ns clojure-commons.core
   "General-purpose Clojure functions."
-  (:use [medley.core :only [remove-vals]]))
+  (:require [medley.core :refer [remove-vals]]))
 
 (defn remove-nil-values
   "Removes entries containing nil values from a map."

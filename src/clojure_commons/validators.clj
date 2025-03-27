@@ -1,10 +1,9 @@
 (ns clojure-commons.validators
-  (:use [slingshot.slingshot :only [try+ throw+]])
-  (:require [clojure-commons.exception :as cx])
-  (:import [clojure.lang IPersistentMap]))
+  (:require [clojure-commons.exception :as cx]
+            [slingshot.slingshot :refer [try+ throw+]]))
 
 
-(defn ^Boolean nonnegative-int?
+(defn nonnegative-int?
   "Indicates whether or not the unparsed field value contains a nonnegative integer.
 
    Parameters:
@@ -13,7 +12,7 @@
    Returns:
      It returns true if str-val contains a 32-bit integer value that is zero or positive, otherwise
      it returns false."
-  [^String str-val]
+  [str-val]
   (boolean
     (try+
       (<= 0 (Integer/parseInt str-val))
@@ -116,7 +115,7 @@
 
        :error_code - ERR_BAD_QUERY_PARAMETER
        :parameters - The params map filtered for those parameters with bad values."
-  [^IPersistentMap params ^IPersistentMap validators]
+  [params validators]
   (check-missing throw-missing-params params (keys validators))
   (check-valid throw-bad-params params validators))
 

@@ -3,7 +3,7 @@
 
 (defn get-status
   "Returns a service status map."
-  [{:keys [app-name desc group-id art-id] :as svc-info}]
+  [{:keys [app-name desc group-id art-id]}]
   {:service      app-name
    :description  desc
    :version      (versioneer/get-version group-id art-id)})

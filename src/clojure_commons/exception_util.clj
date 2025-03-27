@@ -1,6 +1,6 @@
 (ns clojure-commons.exception-util
-  (:use [slingshot.slingshot :only [throw+]])
-  (:require [clojure-commons.exception :as cx]))
+  (:require [clojure-commons.exception :as cx]
+            [slingshot.slingshot :refer [throw+]]))
 
 (defn unauthorized
   "Throws an error indicating that the request is unauthorized."

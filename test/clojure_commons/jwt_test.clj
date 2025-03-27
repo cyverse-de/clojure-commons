@@ -1,11 +1,10 @@
 (ns clojure-commons.jwt-test
-  (:use [clojure.test]
-        [slingshot.slingshot :only [try+]])
   (:require [buddy.core.keys :as keys]
             [clj-time.core :as time]
             [clojure.string :as string]
-            [clojure-commons.jwt :as jwt])
-  (:import [clojure.lang ExceptionInfo]))
+            [clojure.test :refer [deftest is]]
+            [clojure-commons.jwt :as jwt]
+            [slingshot.slingshot :refer [try+]]))
 
 (def user {:user        "ipctest"
            :email       "ipctest@iplantcollaborative.org"
@@ -77,21 +76,21 @@
 (defn- build-custom-assertion
   [validity-window-end {:keys [user email given-name family-name common-name]}]
   (let [now (time/now)]
-    {:exp                                 (time/plus now (time/seconds validity-window-end))
-     :iat                                 now
-     :http://wso2.org/claims/enduser      (str "foo/" user)
-     :http://wso2.org/claims/emailaddress email
-     :http://wso2.org/claims/givenname    given-name
-     :http://wso2.org/claims/lastname     family-name
-     :http://wso2.org/claims/fullname     common-name}))
+    {:exp                               (time/plus now (time/seconds validity-window-end))
+     :iat                               now
+     :http:wso2.org.claims.enduser      (str "foo/" user)
+     :http:wso2.org.claims.emailaddress email
+     :http:wso2.org.claims.givenname    given-name
+     :http:wso2.org.claims.lastname     family-name
+     :http:wso2.org.claims.fullname     common-name}))
 
 (defn- user-from-custom-assertion
   [jwt]
-  {:user        (string/replace (:http://wso2.org/claims/enduser jwt) #"[^/]+/" "")
-   :email       (:http://wso2.org/claims/emailaddress jwt)
-   :given-name  (:http://wso2.org/claims/givenname jwt)
-   :family-name (:http://wso2.org/claims/lastname jwt)
-   :common-name (:http://wso2.org/claims/fullname jwt)})
+  {:user        (string/replace (:http:wso2.org.claims.enduser jwt) #"[^/]+/" "")
+   :email       (:http:wso2.org.claims.emailaddress jwt)
+   :given-name  (:http:wso2.org.claims.givenname jwt)
+   :family-name (:http:wso2.org.claims.lastname jwt)
+   :common-name (:http:wso2.org.claims.fullname jwt)})
 
 (def custom-generator (jwt/generator build-custom-assertion opts))
 
