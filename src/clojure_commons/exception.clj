@@ -5,7 +5,7 @@
             [ring.util.http-response :as resp]
             [ring.util.response :as header]
             [service-logging.middleware :as smw]
-            [slingshot.slingshot :only [get-throw-context]]))
+            [slingshot.slingshot :refer [get-throw-context]]))
 
 (def ^:private clj-http-error?
   (every-pred :status :headers :body))

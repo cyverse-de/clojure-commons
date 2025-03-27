@@ -1,7 +1,8 @@
 (ns clojure-commons.progress
   (:require [clj-time.core :as ct])
   (:import [clojure.lang IFn]
-           [org.joda.time.format PeriodFormatterBuilder PeriodFormatter PeriodType]))
+           [org.joda.time PeriodType]
+           [org.joda.time.format PeriodFormatterBuilder PeriodFormatter]))
 
 
 (def ^:private ^PeriodFormatter period-formatter
