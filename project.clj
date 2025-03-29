@@ -1,4 +1,4 @@
-(defproject org.cyverse/clojure-commons "3.0.11"
+(defproject org.cyverse/clojure-commons "3.0.12-SNAPSHOT"
   :description "Common Utilities for Clojure Projects"
   :url "https://github.com/cyverse-de/clojure-commons"
   :license {:name "BSD"
