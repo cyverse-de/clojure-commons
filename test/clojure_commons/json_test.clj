@@ -1,6 +1,6 @@
 (ns clojure-commons.json-test
-  (:use [clojure.test]
-        [clojure-commons.json])
+  (:require [clojure.test :refer [deftest is]]
+            [clojure-commons.json :refer [body->json string->json]])
   (:import [java.io StringReader]))
 
 (def ^:private test-json "{\"foo\":\"bar\"}")

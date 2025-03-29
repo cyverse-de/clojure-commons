@@ -1,9 +1,8 @@
 (ns clojure-commons.client
-  (:use [clojure.string :only [join]]
-        [slingshot.slingshot :only [throw+]])
   (:require [cemerick.url :as url]
             [clj-http.client :as client]
-            [clojure-commons.error-codes :as ce])
+            [clojure-commons.error-codes :as ce]
+            [slingshot.slingshot :refer [throw+]])
   (:import [java.io InputStream])
   (:refer-clojure :exclude [get]))
 

@@ -1,12 +1,11 @@
 (ns clojure-commons.jwt
-  (:use [clojure.java.io :only [file]]
-        [medley.core :only [remove-vals]]
-        [slingshot.slingshot :only [try+]])
   (:require [buddy.core.keys :as keys]
             [buddy.sign.jwt :as jwt]
             [clj-time.core :as time]
+            [clojure.java.io :refer [file]]
             [clojure.string :as string]
-            [clojure-commons.exception-util :as cx-util]))
+            [medley.core :refer [remove-vals]]
+            [slingshot.slingshot :refer [try+]]))
 
 (defn build-default-assertion
   [validity-window-end {:keys [user email given-name family-name common-name]}]

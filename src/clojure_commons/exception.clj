@@ -1,12 +1,11 @@
 (ns clojure-commons.exception
-  (:use [slingshot.slingshot :only [get-throw-context]]
-        [service-logging.thread-context :only [with-logging-context]])
   (:require [clojure-commons.error-codes :as ec]
             [cheshire.core :as cheshire]
             [compojure.api.exception :as ex]
+            [ring.util.http-response :as resp]
             [ring.util.response :as header]
             [service-logging.middleware :as smw]
-            [ring.util.http-response :as resp]))
+            [slingshot.slingshot :refer [get-throw-context]]))
 
 (def ^:private clj-http-error?
   (every-pred :status :headers :body))

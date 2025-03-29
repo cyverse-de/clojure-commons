@@ -1,6 +1,6 @@
 (ns clojure-commons.core-test
-  (:use [clojure.test]
-        [clojure-commons.core]))
+  (:require [clojure.test :refer [deftest is]]
+            [clojure-commons.core :refer [unique-by]]))
 
 (deftest unique-by-with-empty-sequence
   (is (empty? (unique-by :id [])))

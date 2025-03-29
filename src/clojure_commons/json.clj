@@ -1,6 +1,6 @@
 (ns clojure-commons.json
-  (:use [clojure.java.io :only [reader]])
-  (:require [cheshire.core :as cheshire]))
+  (:require [cheshire.core :as cheshire]
+            [clojure.java.io :refer [reader]]))
 
 ;;; Things to make working with POSTs/PUTs easier
 (defonce json-mime-type "application/json")

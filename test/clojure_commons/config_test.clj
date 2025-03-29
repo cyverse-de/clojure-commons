@@ -1,7 +1,6 @@
 (ns clojure-commons.config-test
-  (:use [clojure.test])
-  (:require [clojure-commons.test-configs :as tc])
-  (:import [java.util Properties]))
+  (:require [clojure.test :refer [deftest is]]
+            [clojure-commons.test-configs :as tc]))
 
 (defn check-configs []
   (is (= "bar" (tc/foo)))

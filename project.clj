@@ -5,7 +5,8 @@
             :url "https://cyverse.org/license"}
   :eastwood {:exclude-namespaces [:test-paths]
              :linters [:wrong-arity :wrong-ns-form :wrong-pre-post :wrong-tag :misplaced-docstrings]}
-  :plugins [[jonase/eastwood "1.4.3"]
+  :plugins [[com.github.clj-kondo/lein-clj-kondo "2025.02.20"]
+            [jonase/eastwood "1.4.3"]
             [lein-ancient "0.7.0"]
             [test2junit "1.4.4"]]
   :deploy-repositories [["releases" :clojars]
@@ -21,6 +22,7 @@
                  [com.cemerick/url "0.1.1" :exclusions [com.cemerick/clojurescript.test]]
                  [commons-configuration "1.10"    ; provides org.apache.commons.configuration
                   :exclusions [commons-logging]]
+                 [io.github.clj-kondo/config-slingshot-slingshot "1.0.0"]
                  [me.raynes/fs "1.4.6"]
                  [medley "1.4.0"]
                  [slingshot "0.12.2"]

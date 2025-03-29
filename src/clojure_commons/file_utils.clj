@@ -6,15 +6,15 @@
             [me.raynes.fs :as fs])
   (:import [java.io File]))
 
-(defn- ^File file
-  [& args]
+(defn- file
+  ^File [& args]
   (apply io/file args))
 
 (def ^:dynamic *max-temp-dir-attempts*
   "The maximum number of times to attempt to create a temporary directory."
   10)
 
-(defn ^String path-join
+(defn path-join
   "Joins paths together and returns the resulting path as a string. nil and empty strings are
    silently discarded.
 
@@ -29,17 +29,17 @@
       ""
       (str (apply file paths')))))
 
-(defn ^String rm-last-slash
+(defn rm-last-slash
   "Returns a new version of 'path' with the last slash removed.
 
    Parameters:
      path - String containing a path.
 
    Returns: New version of 'path' with the trailing slash removed."
-  [^String path]
+  [path]
   (when path (.replaceAll path "/$" "")))
 
-(defn ^String basename
+(defn basename
   "Returns the basename of 'path'.
 
    This works by calling getName() on a java.io.File instance. It's prefered
@@ -50,10 +50,10 @@
 
    Returns:
      String containing the basename of path."
-  [^String path]
+  [path]
   (.getName (file path)))
 
-(defn ^String dirname
+(defn dirname
   "Returns the dirname of 'path'.
 
    This works by calling getParent() on a java.io.File instance.
@@ -63,20 +63,20 @@
 
    Returns:
      String containing the dirname of path."
-  [^String path]
+  [path]
   (when path (.getParent (file path))))
 
-(defn ^String add-trailing-slash
+(defn add-trailing-slash
   "Adds a trailing slash to 'input-string' if it doesn't already have one."
-  [^String input-string]
+  [input-string]
   (if-not (.endsWith input-string "/")
     (str input-string "/")
     input-string))
 
-(defn ^String normalize-path
+(defn normalize-path
   "Normalizes a file path on Unix systems by eliminating '.' and '..' from it.
    No attempts are made to resolve symbolic links."
-  [^String file-path]
+  [file-path]
   (loop [dest [] src (string/split file-path #"/")]
     (if (empty? src)
       (string/join "/" dest)
@@ -85,27 +85,27 @@
               (= curr "..") (recur (vec (butlast dest)) (rest src))
               :else (recur (conj dest curr) (rest src)))))))
 
-(defn ^String abs-path
+(defn abs-path
   "Converts a path to an absolute path."
-  [^String file-path]
+  [file-path]
   (normalize-path (.getAbsolutePath (file file-path))))
 
-(defn ^Boolean abs-path?
+(defn abs-path?
   "Returns true if the path passed in is an absolute path."
-  [^String file-path]
+  [file-path]
   (.isAbsolute (file file-path)))
 
-(defn ^Boolean file?
+(defn file?
   "Tests whether the path is a file."
-  [^String file-path]
+  [file-path]
   (.isFile (file file-path)))
 
-(defn ^Boolean dir?
+(defn dir?
   "Tests whether the path is a directory."
-  [^String file-path]
+  [file-path]
   (.isDirectory (file file-path)))
 
-(defn ^Boolean exists?
+(defn exists?
   "Tests whether the given paths exist on the filesystem."
   [& filepaths]
   (every? (fn [^File f] (.exists f)) (map file filepaths)))
@@ -130,12 +130,12 @@
         (if (.mkdir f) f (recur (inc idx))))
       nil)))
 
-(defn ^File temp-dir
+(defn temp-dir
   "Creates a temporary directory.  This function is used by the with-temp-dir
    macro to create the temporary directory."
-  ([prefix err-fn]
+  (^File [prefix err-fn]
      (temp-dir prefix (file (System/getProperty "user.dir")) err-fn))
-  ([prefix ^File parent err-fn]
+  (^File [prefix parent err-fn]
      (let [base          (str prefix (System/currentTimeMillis) "-")
            temp-dir-file (fn [idx] (file parent (str base idx)))
            temp-dir      (mk-temp-dir temp-dir-file)]

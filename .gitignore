@@ -15,7 +15,7 @@ build.xml
 test2junit
 .eastwood
 .nrepl-port
-.clj-kondo
+.clj-kondo/.cache
 .lsp
 .idea
 *.iml
